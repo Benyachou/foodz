@@ -1,0 +1,34 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "Courgette",
+            "type": "légume"
+        },
+        {
+            "id": 2,
+            "name": "Harricot vert",
+            "type": "légume"
+        },
+        {
+            "id": 3,
+            "name": "Oeuf",
+            "type": "Protéine"
+        },
+        {
+            "id": 4,
+            "name": "Formage rappé",
+            "type": "fromage"
+        },
+        {
+            "id": 5,
+            "name": "Crème fraiche",
+            "type": "fromage"
+        },
+        {
+            "id": 6,
+            "name": "Poivron",
+            "type": "légume"
+        }
+    ]
+}

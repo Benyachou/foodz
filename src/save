@@ -1,0 +1,69 @@
+import {Modal} from "./components/Modal";
+import {Search} from "./components/imput/Search";
+import {SimpleSelect} from "./components/imput/SimpleSelect";
+import {Input} from "./components/imput/Input";
+import {MultipleSelect} from "./components/imput/MultipleSelect";
+import Icon from "./components/Icon";
+import {useGet, usePost} from "./hooks/useFetch";
+import {Loading} from "./components/Loading";
+
+function App() {
+
+    const [ingredients,loadIngredients] = useGet({path:"http://localhost:5001/api/ingredients",start:true});
+    const [recettes,loadRecettes] = useGet({path:"http://localhost:5001/api/recettes",start:true});
+    const [result, loading, runPostRecette] = usePost({
+        path:"http://localhost:5001/api/add-recettes",
+        start:false,
+    })
+
+    return ( <div className="App">
+        <h1 className="h1 my-4">Foodz</h1>
+
+        {loadIngredients && loadRecettes ? <Loading/>:
+        <>
+
+
+            {/* recette */}
+            <div className='container'>
+                {recettes?.data.map((recette:any) =>
+                    <div className="card" key={recette.id}>
+                        <div className={'flex justify-between'}>
+                            <div className='flex items-center'>
+                                {/* name */}
+                                <h2 className="h2">{recette.name}</h2>
+
+                                {/* calories */}
+                                <ul className='flex items-center ml-2'>
+                                    {Array(recette.calories).fill(0).map((_, index) => (
+                                        <li key={index} className='rounded-full shadow p-2 ml-1'>
+                                            <Icon name={'star'} className={'text-yellow-500'} />
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div className={'flex'}>
+                                <Icon name={'edit'} onClick={() => {}} />
+                                <Icon name={'delete'} onClick={() => {}} />
+                            </div>
+                        </div>
+
+                        {/* ingredients */}
+                        <ul className='flex mt-2'>
+                            {recette.ingredients.map((id:number) => {
+                                const ingredientName = ingredients?.data.find((i:any) => i.id === id)?.name
+                                return (
+                                    <li key={id} className='label'>
+                                        {ingredientName}
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                )}
+            </div>
+        </>}
+
+    </div>)
+}
+
+export default App

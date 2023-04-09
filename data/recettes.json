@@ -1,0 +1,84 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Oeuf au plat",
+      "ingredients": [
+        3
+      ],
+      "calories": 1
+    },
+    {
+      "id": 2,
+      "name": "Oeuf coco",
+      "ingredients": [
+        3,
+        4
+      ],
+      "calories": 3
+    },
+    {
+      "id": 3,
+      "name": "Oeuf mimosa",
+      "calories": 1,
+      "ingredients": [
+        3
+      ]
+    },
+    {
+      "id": 4,
+      "name": "hello",
+      "calories": 2,
+      "ingredients": [
+        2,
+        4
+      ]
+    },
+    {
+      "id": 5,
+      "name": "helloooo",
+      "calories": 3,
+      "ingredients": [
+        1,
+        4,
+        6
+      ]
+    },
+    {
+      "id": 6,
+      "name": "josxe",
+      "calories": 2,
+      "ingredients": [
+        3,
+        2
+      ]
+    },
+    {
+      "id": 7,
+      "name": "sdcsdcsdcs",
+      "calories": 1,
+      "ingredients": [
+        3,
+        2,
+        5
+      ]
+    },
+    {
+      "id": 8,
+      "name": "dpe_beta",
+      "calories": 3,
+      "ingredients": [
+        2
+      ]
+    },
+    {
+      "id": 9,
+      "name": "josebové",
+      "calories": 2,
+      "ingredients": [
+        1,
+        4
+      ]
+    }
+  ]
+}
