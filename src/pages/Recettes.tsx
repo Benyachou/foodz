@@ -8,10 +8,12 @@ import {useEffect, useState} from "react";
 
 const Recettes = () => {
 
-	const [ingredients,loadIngredients] = useGet({path:"http://localhost:5001/api/ingredients",start:true});
-	const [recettes,loadRecettes,runGetRecette] = useGet({path:"http://localhost:5001/api/recettes",start:false});
+	const URL_API = import.meta.env.VITE_URL_API
+	
+	const [ingredients,loadIngredients] = useGet({path:URL_API+"/api/ingredients",start:true});
+	const [recettes,loadRecettes,runGetRecette] = useGet({path:URL_API+"/api/recettes",start:false});
 	const [result, loadPostRecette, runPostRecette] = usePost({
-		path:"http://localhost:5001/api/add-recettes",
+		path:URL_API+"/api/add-recettes",
 		start:false,
 	})
 	const [searchValue, setSearchValue] = useState("")
@@ -27,7 +29,7 @@ const Recettes = () => {
 		runPostRecette
 	}
 
-	useEffect(() => runGetRecette(null), []);
+	useEffect(() => runGetRecette(), []);
 
 	return (<RecettesGlobal.Provider value={value}>
 
