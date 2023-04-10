@@ -4,11 +4,12 @@ import {Card} from "../components/Card";
 import {AddUpdateRecette} from "../partials/forms/AddUpdateRecette";
 import {SearchBar} from "../partials/SearchBar";
 import RecettesGlobal from "../contexts/recettes.context";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 const Recettes = () => {
 
-	const URL_API = import.meta.env.VITE_URL_API
+	/*const URL_API = import.meta.env.VITE_URL_API*/
+	const URL_API = ''
 	
 	const [ingredients,loadIngredients] = useGet({path:URL_API+"/api/ingredients",start:true});
 	const [recettes,loadRecettes,runGetRecette] = useGet({path:URL_API+"/api/recettes",start:false});
@@ -16,7 +17,7 @@ const Recettes = () => {
 		path:URL_API+"/api/add-recettes",
 		start:false,
 	})
-	const [searchValue, setSearchValue] = useState("")
+	/*const [searchValue, setSearchValue] = useState("")*/
 
 	const value = {
 		ingredients,
