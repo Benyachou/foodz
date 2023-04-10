@@ -8,13 +8,15 @@ export const api:Api = [
 		"route": "/login",
 		"handler": async(req,res) => {
 
-			req.body.email
-			req.body.password
-
-
+			const response = await writeAddJsonFile({
+				email:req.body.email,
+				password:req.body.password
+			},"../data/logs.json");
 
 			res.set('Access-Control-Allow-Origin', '*');
-			res.json(JSON.parse(fs.readFileSync("../data/recettes.json").toString()));
+			res.json({
+				"status": "error",
+			});
 		}
 	},
 	/*{

@@ -1,10 +1,9 @@
 import {Input, MultipleSelect, SimpleSelect} from "../../components/imput";
-import {useContext} from "react";
-import RecettesGlobal from "../../contexts/recettes.context";
+import {useRecetteGlobal} from "../../hooks/useRecetteGlobal";
 
 const AddUpdateRecette = () => {
 
-	const global = useContext(RecettesGlobal);
+	const global = useRecetteGlobal();
 
 	return (
 		<>
