@@ -22,7 +22,7 @@ module.exports = {
 		production : {
 			"user" : USER,
 			"host" : [HOST],
-			"ref"  : "origin/master",
+			"ref"  : "origin/main",
 			/*"repo" : `git@github.com:${REPOSITORY}.git`,*/
 			"repo" : `https://@github.com/${REPOSITORY}`,
 			"path" : PATH,
