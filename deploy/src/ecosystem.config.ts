@@ -38,7 +38,7 @@ module.exports = {
 				${PACKAGE_MANAGER} run build`,
 			"post-deploy" :
 				`${start("production", "production")} &&
-				pm2 save'`,
+				pm2 save`,
 			"pre-setup" : "",
 		}
 	}
