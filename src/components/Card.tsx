@@ -1,6 +1,5 @@
 import {Icon} from "./index";
-import {useContext} from "react";
-import RecettesGlobal from "../contexts/recettes.context";
+import {useRecetteGlobal} from "../hooks/useRecetteGlobal";
 
 type Props = {
     recette: any
@@ -8,7 +7,7 @@ type Props = {
 
 const Card = ({recette}:Props) => {
 
-    const global = useContext(RecettesGlobal);
+    const global = useRecetteGlobal()
 
     return(<div className="card" key={recette.id}>
         <div className={'flex justify-between'}>

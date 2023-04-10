@@ -4,6 +4,28 @@ import {writeAddJsonFile} from "./utils/writeAddJsonFile";
 
 export const api:Api = [
 	{
+		"method": "post",
+		"route": "/login",
+		"handler": async(req,res) => {
+
+			req.body.email
+			req.body.password
+
+
+
+			res.set('Access-Control-Allow-Origin', '*');
+			res.json(JSON.parse(fs.readFileSync("../data/recettes.json").toString()));
+		}
+	},
+	/*{
+		"method": "get",
+		"route": "/user",
+		"handler": async(req,res) => {
+			res.set('Access-Control-Allow-Origin', '*');
+			res.json(JSON.parse(fs.readFileSync("../data/recettes.json").toString()));
+		}
+	},*/
+	{
 		"method": "get",
 		"route": "/recettes",
 		"handler": async(req,res) => {

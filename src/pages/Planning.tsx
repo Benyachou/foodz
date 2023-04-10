@@ -1,11 +1,10 @@
 type Props = {
-	children: JSX.Element | JSX.Element[]
 }
 
-const Planning = ({children}: Props) => {
+const Planning = ({}: Props) => {
 
 	return (<div className={""}>
-		{children}
+		<h1>Planning</h1>
 	</div>)
 }
 

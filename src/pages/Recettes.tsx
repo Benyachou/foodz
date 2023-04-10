@@ -8,8 +8,7 @@ import {useEffect} from "react";
 
 const Recettes = () => {
 
-	/*const URL_API = import.meta.env.VITE_URL_API*/
-	const URL_API = ''
+	const URL_API = import.meta.env.VITE_URL_API ?? ''
 	
 	const [ingredients,loadIngredients] = useGet({path:URL_API+"/api/ingredients",start:true});
 	const [recettes,loadRecettes,runGetRecette] = useGet({path:URL_API+"/api/recettes",start:false});

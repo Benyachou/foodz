@@ -1,6 +1,6 @@
 const Loading = () => {
 
-	return(<div className={'w-full h-full flex justify-center items-center dark:text-white text-black'}>
+	return(<div className={'w-full h-full py-20 flex justify-center items-center dark:text-white text-black'}>
 		<svg
 			className={'h-20 w-20'}
 			version="1.1"
