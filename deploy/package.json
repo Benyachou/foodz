@@ -1,0 +1,20 @@
+{
+  "name": "deploy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "dev": "npx tsc --watch",
+    "updateServer": "cd dist && npx pm2 deploy production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.3"
+  }
+}
