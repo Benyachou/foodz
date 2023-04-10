@@ -27,7 +27,6 @@ module.exports = {
 			"user" : USER,
 			"host" : [HOST],
 			"ref"  : REF,
-			/*"repo" : `git@github.com:${REPOSITORY}.git`,*/
 			"repo" : `https://@github.com/${REPOSITORY}`,
 			"path" : PATH,
 
