@@ -8,8 +8,7 @@ const REF = "origin/main";
 const NAME_PROJECT_SNAKE = "foodz";
 /*const gitURl = `https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${PROJECT_GIT}`*/
 /*https://@github.com/jviatge/foodz*/
-const start = (type, env) => `cd ./server && pm2 startOrRestart ecosystem.config.js --env ${env} --only ${NAME_PROJECT_SNAKE}_${type} && cd ../`;
-
+const start = (type, env) => `cd ./deploy/dist && pm2 startOrRestart ecosystem.config.js --env ${env} --only ${NAME_PROJECT_SNAKE}_${type} && cd ../../`;
 module.exports = {
     apps: [{
             cwd: "../../",
