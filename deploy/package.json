@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx tsc",
     "dev": "npx tsc --watch",
-    "updateServer": "cd dist && npx pm2 deploy production"
+    "install-production": "cd dist && npx pm2 deploy production setup",
+    "update-production": "cd dist && npx pm2 deploy production"
   },
   "keywords": [],
   "author": "",
