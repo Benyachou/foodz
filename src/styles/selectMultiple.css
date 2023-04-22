@@ -1,0 +1,13 @@
+.text-sm__menu{
+    @apply bg-gray-100 dark:bg-gray-700 p-1 left-0 rounded-lg border border-gray-200;
+}
+/*.text-sm__menu-list{
+    @apply bg-red-400 ;
+}*/
+.text-sm__option{
+    @apply p-2 hover:bg-gray-400 text-gray-900 rounded-lg px-2 hover:cursor-pointer;
+}
+
+.text-sm__multi-value{
+    @apply bg-gray-200 dark:bg-gray-600 p-1 rounded-lg border border-gray-200 mr-2 my-1;
+}

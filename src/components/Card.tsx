@@ -1,13 +1,16 @@
 import {Icon} from "./index";
-import {useRecetteGlobal} from "../hooks/useRecetteGlobal";
+import {useAtom} from "jotai";
+import {global} from "../store";
 
 type Props = {
     recette: any
+    onClickEdit?: () => void
+    onClickDelete?: () => void
 }
 
-const Card = ({recette}:Props) => {
+const Card = ({recette,onClickEdit,onClickDelete}:Props) => {
 
-    const global = useRecetteGlobal()
+    const [Global] = useAtom(global)
 
     return(<div className="card" key={recette.id}>
         <div className={'flex justify-between'}>
@@ -25,15 +28,15 @@ const Card = ({recette}:Props) => {
                 </ul>
             </div>
             <div className={'flex'}>
-                <Icon name={'edit'} onClick={() => {}} />
-                <Icon name={'delete'} onClick={() => {}} />
+                <Icon name={'edit'} onClick={() => onClickEdit && onClickEdit()} />
+                <Icon name={'delete'} onClick={() => onClickDelete && onClickDelete()} />
             </div>
         </div>
 
         {/* ingredients */}
         <ul className='flex mt-2'>
             {recette.ingredients.map((id:number) => {
-                const ingredientName = global.ingredients?.data.find((i:any) => i.id === id)?.name
+                const ingredientName = Global.ingredients.find((i:any) => i.id === id)?.name
                 return (
                     <li key={id} className='label'>
                         {ingredientName}

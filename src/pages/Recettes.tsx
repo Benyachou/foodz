@@ -1,69 +1,64 @@
 import {Loading, Modal} from "../components";
-import {useGet, usePost} from "../hooks";
 import {Card} from "../components/Card";
-import {AddUpdateRecette} from "../partials/forms/AddUpdateRecette";
 import {SearchBar} from "../partials/SearchBar";
-import RecettesGlobal from "../contexts/recettes.context";
+import {useIngredients, useRecettes} from "../hooks/apiHook";
+import {global} from "../store";
 import {useEffect} from "react";
+import {AddUpdateRecette} from "../partials/forms";
+import {useAtom} from "jotai";
 
 const Recettes = () => {
 
-	const URL_API = import.meta.env.VITE_URL_API ?? ''
-	
-	const [ingredients,loadIngredients] = useGet({path:URL_API+"/api/ingredients",start:true});
-	const [recettes,loadRecettes,runGetRecette] = useGet({path:URL_API+"/api/recettes",start:false});
-	const [result, loadPostRecette, runPostRecette] = usePost({
-		path:URL_API+"/api/add-recettes",
-		start:false,
-	})
-	/*const [searchValue, setSearchValue] = useState("")*/
+	const [Global,setGlobal] = useAtom(global)
+	const ingredients = useIngredients()
+	const {
+		fetchGetRecette,
+		fetchPostRecette
+	} = useRecettes()
 
-	const value = {
-		ingredients,
-		loadIngredients,
-		recettes,
-		loadRecettes,
-		runGetRecette,
-		result,
-		loadPostRecette,
-		runPostRecette
-	}
+	const recettes = fetchGetRecette()
+	const postRecette = fetchPostRecette()
 
-	useEffect(() => runGetRecette(), []);
+	useEffect(() => {
+		ingredients.data && setGlobal({ ...Global, ingredients: ingredients.data })
+	},[ingredients.isLoading])
 
-	return (<RecettesGlobal.Provider value={value}>
 
-		<SearchBar />
-
-		<Modal
-			title="Ajouter une recette"
-			buttonValidate="Ajouter"
-			buttonCancel="Annuler"
-			validateAction={async(e) => {
-				const form = e.target
-				const elements = form.elements
-				const newRecette = {
-					name: elements.name.value,
-					calories: elements.calories.value,
-					ingredients: elements.ingredients.value,
-				}
-				runPostRecette(newRecette,() => runGetRecette())
-			}}
-		>
-			<AddUpdateRecette />
-		</Modal>
-
+	return (
 		<div className='container'>
-			{loadRecettes || loadIngredients ?
+
+			<SearchBar />
+
+			<Modal
+				title="Ajouter une recette"
+				buttonValidate="Ajouter"
+				buttonCancel="Annuler"
+				validateAction={async(e) => {
+
+					const formData = new FormData(e.currentTarget)
+
+					const newRecette = {
+						name: String(formData.get('name')),
+						calories: Number(formData.get('calories')),
+						ingredients: formData.get('ingredients'),
+					}
+
+					postRecette.mutate(newRecette)
+				}}
+			>
+				<AddUpdateRecette />
+			</Modal>
+
+			{recettes.isLoading ?
 				<Loading />
 				:
 				<>
-					{recettes?.data.map((recette:any) => <Card key={recette.id} recette={recette} />)}
+					{recettes.data?.map((recette:any) => <Card key={recette.id} recette={recette} />)}
 				</>
 			}
-		</div>
 
-		</RecettesGlobal.Provider>)
+		</div>
+	)
 }
 
 

@@ -1,5 +1,4 @@
 import {LoginAuth} from "../partials/forms";
-import {usePost} from "../hooks";
 
 type Props = {
 
@@ -7,23 +6,24 @@ type Props = {
 
 const Login = ({}: Props) => {
 
-	const URL_API = import.meta.env.VITE_URL_API ?? ''
+	/*const URL_API = import.meta.env.VITE_URL_API ?? ''*/
 
-	const [result, loadPostLogin, runPostLogin] = usePost({
-		path:URL_API+"/api/login",
+	/*const [result, loadPostLogin, runPostLogin] = usePost({
+		credentials:true,
+		path:URL_API+"/api/auth",
 		start:false,
-	})
+	})*/
 
 	const handleLogin = (e:any) => {
 		e.preventDefault()
-		const form = e.target
+		/*const form = e.target
 		const elements = form.elements
 		const loginData = {
 			email: elements.email.value,
 			password: elements.password.value,
-		}
-		runPostLogin(loginData)
-		form.reset()
+		}*/
+		/*runPostLogin(loginData)*/
+		/*form.reset()*/
 	}
 
 	// login page here

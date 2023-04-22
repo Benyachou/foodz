@@ -1,3 +1,5 @@
+@import "styles/selectMultiple.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

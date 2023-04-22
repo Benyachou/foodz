@@ -1,4 +1,4 @@
-import Select, {ActionMeta, MultiValue} from 'react-select'
+import Select from 'react-select'
 import {useState} from "react";
 
 type Props = {
@@ -13,7 +13,7 @@ const MultipleSelect = ({className='',label,placeholder='',options,name}: Props)
 	const [selectedOptions, setSelectedOptions] = useState();
 	const [value, setValue] = useState<any>([]);
 
-	function handleSelect(data:any) {
+	const handleSelect = (data:any) => {
 		const cacheValue:string[] = []
 		data.map((option:{value:string}) => {
 			cacheValue.push(option.value.toString())
@@ -26,6 +26,7 @@ const MultipleSelect = ({className='',label,placeholder='',options,name}: Props)
 		{label && <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label}</label>}
 		<input type={"hidden"} name={name} value={value}/>
 		<Select
+			loadingMessage={() => 'Chargement...'}
 			value={selectedOptions}
 			isSearchable={true}
 			closeMenuOnSelect={false}

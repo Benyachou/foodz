@@ -1,6 +1,6 @@
-import {Input, MultipleSelect, Search, SimpleSelect} from "../components/imput";
-import RecettesGlobal from "../contexts/recettes.context";
-import {useContext} from "react";
+import {MultipleSelect} from "../components/imput";
+import {useAtom} from "jotai";
+import {global} from "../store";
 
 type Props = {
 
@@ -8,12 +8,12 @@ type Props = {
 
 const SearchBar = ({}: Props) => {
 
-	const global = useContext(RecettesGlobal);
+	const [Global] = useAtom(global)
 
 	return (<div className={'flex items-center my-4'}>
 
 		<MultipleSelect
-			options={global.ingredients?.data.map((ingredient:any) => ({value: ingredient.id, label: ingredient.name}))}
+			options={Global.ingredients.map((ingredient:any) => ({value: ingredient.id, label: ingredient.name}))}
 			className={'mx-2'}
 			placeholder={'Ingrédients'} />
 

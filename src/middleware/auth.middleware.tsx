@@ -1,5 +1,5 @@
 import {Navigate} from 'react-router-dom';
-import {useAuth} from "../hooks";
+/*import {useAuth} from "../hooks";*/
 
 type AuthProps = {
 	children: JSX.Element | JSX.Element[]
@@ -7,7 +7,10 @@ type AuthProps = {
 
 const AuthMiddleware = ({ children }:AuthProps) => {
 
-	const { token } = useAuth();
+	/*const { token } = useAuth();*/
+	const { token } = {
+		token: "test"
+	}
 
 	if (!token) {
 		return <Navigate to="/login" replace />;

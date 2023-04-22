@@ -1,9 +1,10 @@
 import {Input, MultipleSelect, SimpleSelect} from "../../components/imput";
-import {useRecetteGlobal} from "../../hooks/useRecetteGlobal";
+import {useAtom} from "jotai";
+import {global} from "../../store";
 
 const AddUpdateRecette = () => {
 
-	const global = useRecetteGlobal();
+	const [Global] = useAtom(global)
 
 	return (
 		<>
@@ -32,7 +33,7 @@ const AddUpdateRecette = () => {
 				name={'ingredients'}
 				label={'Ingrédients'}
 				placeholder={'Ingrédients'}
-				options={global.ingredients?.data.map((ingredient:any) => ({value: ingredient.id, label: ingredient.name}))}
+				options={Global.ingredients.map((ingredient:any) => ({value: ingredient.id, label: ingredient.name}))}
 			/>
 		</>
 	)

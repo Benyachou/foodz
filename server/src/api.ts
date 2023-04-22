@@ -1,22 +1,30 @@
-import fs from "fs";
 import {Api} from "./types/api";
-import {writeAddJsonFile} from "./utils/writeAddJsonFile";
+import {create, getAll} from "./utils/orm";
+/*const passport = require('passport');*/
 
 export const api:Api = [
 	{
 		"method": "post",
-		"route": "/login",
+		"route": "/auth",
 		"handler": async(req,res) => {
 
-			const response = await writeAddJsonFile({
+			await create("../data/logs.json",{
 				email:req.body.email,
 				password:req.body.password
-			},"../data/logs.json");
-
-			res.set('Access-Control-Allow-Origin', '*');
-			res.json({
-				"status": "error",
 			});
+
+			req.session.loggedin = true;
+			req.session.username = 'julien viatge';
+
+			res.json({"status": "error"});
+		}
+	},
+	{
+		"method": "post",
+		"route": "/logout",
+		"handler": async(req,res) => {
+			req.session = null;
+			res.json({"status": "ok"});
 		}
 	},
 	/*{
@@ -31,21 +39,18 @@ export const api:Api = [
 		"method": "get",
 		"route": "/recettes",
 		"handler": async(req,res) => {
-			res.set('Access-Control-Allow-Origin', '*');
-			res.json(JSON.parse(fs.readFileSync("../data/recettes.json").toString()));
+			res.json(getAll("../data/recettes.json"));
 		}
 	},
 	{
 		"method": "post",
 		"route": "/add-recettes",
 		"handler": async(req,res) => {
-			const response = await writeAddJsonFile({
-				name: req.body.name,
+			const response = await create("../data/recettes.json",{
+				name: String(req.body.name),
 				calories: parseInt(req.body.calories),
-				ingredients: req.body.ingredients.split(',').map((id:string) => parseInt(id))
-			},"../data/recettes.json");
-
-			res.set('Access-Control-Allow-Origin', '*');
+				ingredients: String(req.body.ingredients).split(',').map((id:string) => parseInt(id))
+			});
 			res.json(response)
 		}
 	},
@@ -53,8 +58,7 @@ export const api:Api = [
 		"method": "get",
 		"route": "/ingredients",
 		"handler": async(req,res) => {
-			res.set('Access-Control-Allow-Origin', '*');
-			res.json(JSON.parse(fs.readFileSync("../data/ingredients.json").toString()));
+			res.json(getAll("../data/ingredients.json"));
 		}
 	}
 ]
