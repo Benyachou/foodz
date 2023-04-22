@@ -39,7 +39,28 @@ export const api:Api = [
 		"method": "get",
 		"route": "/recettes",
 		"handler": async(req,res) => {
-			res.json(getAll("../data/recettes.json"));
+
+			let recettes = getAll("../data/recettes.json");
+
+			if (req.query.ingredients){
+				const ingredients = req.query.ingredients.split(',').map((id:string) => parseInt(id))
+				recettes.data = recettes.data.filter((recette:any) => recette.ingredients.some((id:number) => ingredients.includes(id)))
+			}
+
+			if (req.query.calories){
+				const calories = parseInt(req.query.calories)
+				console.log(req.query)
+				recettes.data = recettes.data.filter((recette:any) => recette.calories === calories)
+			}
+
+			if (req.query.name){
+				const name = req.query.name.toLowerCase()
+				recettes.data = recettes.data.filter((recette:any) => recette.name.toLowerCase().includes(name))
+				res.json(recettes);
+				return;
+			}
+
+			res.json(recettes);
 		}
 	},
 	{

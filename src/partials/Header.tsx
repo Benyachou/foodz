@@ -16,9 +16,6 @@ const Header = ({}: Props) => {
 						<Logo />
 					</a>
 				</div>
-				<div className={'w-1/3 flex justify-center'}>
-					<Search className={'mx-2'} />
-				</div>
 				<div className={"w-1/3 flex justify-end"}>
 					<ButtonDarkMod />
 				</div>

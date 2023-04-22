@@ -1,7 +1,9 @@
 import fs from "fs";
 
 export function getOne(jsonFile:string,id:number) {
-
+	// a verifier
+	const json = JSON.parse(fs.readFileSync(jsonFile).toString());
+	return json.data.find((item:any) => item.id === id);
 }
 
 export function update(jsonFile:string,id:number,data: object) {

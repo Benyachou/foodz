@@ -7,8 +7,9 @@ type Props = {
 	placeholder?:string
 	options?:{ value: string|number, label: string|number }[]
 	name?:string
+	onChange?:(value:any) => void
 }
-const MultipleSelect = ({className='',label,placeholder='',options,name}: Props) => {
+const MultipleSelect = ({className='',label,placeholder='',options,name,onChange}: Props) => {
 
 	const [selectedOptions, setSelectedOptions] = useState();
 	const [value, setValue] = useState<any>([]);
@@ -20,6 +21,7 @@ const MultipleSelect = ({className='',label,placeholder='',options,name}: Props)
 		})
 		setSelectedOptions(data);
 		setValue(cacheValue)
+		onChange && onChange(cacheValue)
 	}
 
 	return (<div className={className}>

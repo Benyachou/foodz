@@ -1,6 +1,7 @@
 import Select from "react-select";
 
 type Props = {
+	onChange?: (e: any) => void
 	className?:string
 	label?:string
 	placeholder?:string
@@ -8,13 +9,14 @@ type Props = {
 	name?:string
 }
 
-const SimpleSelect = ({className = '',label,placeholder='',options,name}:Props) => {
+const SimpleSelect = ({className = '',label,placeholder='',options,name,onChange}:Props) => {
 
 	return (<div className={className}>
 
 		{label && <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label}</label>}
 
 		<Select
+			onChange={(e) => onChange && onChange(e)}
 			name={name}
 			placeholder={placeholder}
 			isSearchable={false}

@@ -5,16 +5,25 @@ type Props = {
 	title:string
 	buttonValidate:string
 	buttonCancel:string,
+	classNameBtnModal?:string
 	validateAction?: (e:any) => void
 }
 
-const Modal = ({children,title,buttonValidate,buttonCancel,validateAction}: Props) => {
+const Modal = (
+	{
+		children,
+		title,
+		buttonValidate,
+		buttonCancel,
+		validateAction,
+		classNameBtnModal=""
+	}: Props) => {
 
 	const [open, setOpen] = useState(false);
 
 	return (
 		<>
-			<button className="btn" onClick={() => setOpen(true)}>Ajouter</button>
+			<button className={"btn " + classNameBtnModal} onClick={() => setOpen(true)}>Ajouter</button>
 			{open && (
 				<div
 					/*onClick={() => setOpen(false)}*/
