@@ -13,6 +13,10 @@
 * cd server
 * pnpm run dev
 
+## Running Storybook [local]
+* pnpm run storybook
+
+
 ## production
 * pnpm run build
 * pm2 start --name foodz-app pnpm -- start

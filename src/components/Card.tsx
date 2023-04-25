@@ -3,7 +3,12 @@ import {useAtom} from "jotai";
 import {global} from "../store";
 
 type Props = {
-    recette: any
+    recette: {
+        id: number
+        name: string
+        calories: number
+        ingredients: number[]
+    }
     onClickEdit?: () => void
     onClickDelete?: () => void
 }

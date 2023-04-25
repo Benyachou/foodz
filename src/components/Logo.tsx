@@ -1,3 +1,9 @@
+
+/*
+ * This file is part of the FoodZ project.
+ *
+ * ## usage
+ */
 const Logo = () => {
 
 	return (<div className={"flex items-center dark:text-white"}>
