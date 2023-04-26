@@ -20,6 +20,7 @@ const Recettes = () => {
 
 	const recettes = fetchGetRecette(search)
 	const postRecette = fetchPostRecette()
+	const [addModal, setAddModal] = useState(false);
 
 	useEffect(() => {
 		ingredients.data && setGlobal({ ...Global, ingredients: ingredients.data })
@@ -28,26 +29,30 @@ const Recettes = () => {
 	return (
 		<div className='container'>
 
+			<Modal
+				open={addModal}
+				setOpen={setAddModal}
+				title="Ajouter une recette"
+				buttonValidate="Ajouter"
+				buttonCancel="Annuler"
+				validateAction={async(e) => {
+
+					const formData = new FormData(e.currentTarget)
+
+					const newRecette = {
+						name: String(formData.get('name')),
+						calories: Number(formData.get('calories')),
+						ingredients: formData.get('ingredients'),
+					}
+
+					postRecette.mutate(newRecette)
+				}}
+			>
+				<AddUpdateRecette />
+			</Modal>
+
 			<div className={'w-full flex justify-center items-center pt-4'}>
-				<Modal
-					title="Ajouter une recette"
-					buttonValidate="Ajouter"
-					buttonCancel="Annuler"
-					validateAction={async(e) => {
-
-						const formData = new FormData(e.currentTarget)
-
-						const newRecette = {
-							name: String(formData.get('name')),
-							calories: Number(formData.get('calories')),
-							ingredients: formData.get('ingredients'),
-						}
-
-						postRecette.mutate(newRecette)
-					}}
-				>
-					<AddUpdateRecette />
-				</Modal>
+				<button className={"btn"} onClick={() => setAddModal(true)}>Ajouter</button>
 			</div>
 
 			<SearchBar
@@ -58,7 +63,15 @@ const Recettes = () => {
 				<Loading />
 				:
 				<>
-					{recettes.data?.map((recette:any) => <Card key={recette.id} recette={recette} />)}
+					{recettes.data?.map((recette:any,index:number) =>
+						<Card
+							key={recette.id}
+							index={index}
+							recette={recette}
+							onClickDelete={() => {}}
+							onClickUpdate={() => {setAddModal(true)}}
+						/>
+					)}
 				</>
 			}
 

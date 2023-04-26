@@ -13,15 +13,15 @@ h2{
 }
 
 .App{
-    @apply bg-gray-100 dark:bg-gray-700 flex-col flex items-center min-h-screen relative;
+    @apply bg-gray-200 dark:bg-gray-700 flex-col flex items-center min-h-screen relative;
 }
 
 .card{
-    @apply bg-white dark:bg-gray-600 dark:text-white shadow-lg rounded-lg overflow-hidden my-2 w-full p-4;
+    @apply bg-gray-100 dark:bg-gray-600 dark:text-white shadow-lg rounded-lg overflow-hidden my-2 w-full p-4 cursor-pointer transition-all duration-500 hover:dark:bg-gray-500 hover:bg-white hover:my-3 hover:scale-110 shadow hover:shadow-xl;
 }
 
 .label{
-    @apply text-gray-700 p-2 shadow-sm rounded-md border mr-2 dark:text-white;
+    @apply text-gray-700 py-1 px-2 shadow-sm rounded-md border mr-2 dark:text-white text-sm;
 }
 
 .btn{

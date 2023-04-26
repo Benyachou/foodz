@@ -10,6 +10,7 @@ import {useAtom} from "jotai";
 import {global} from "./store";
 import 'react-toastify/dist/ReactToastify.css';
 import {ToastContainer} from "react-toastify";
+import {Modal} from "./components";
 
 const queryClient:QueryClient = new QueryClient()
 
