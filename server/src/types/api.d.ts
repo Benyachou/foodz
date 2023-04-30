@@ -1,5 +1,5 @@
 declare type Api = {
-	handler: (req: e.Request, res: e.Response) => void;
+	controller: (req: e.Request, res: e.Response) => any|{status:number, jsonRep: Object};
 	method: "get"|"post"
 	route: string;
 }[]

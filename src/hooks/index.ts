@@ -1,5 +1,5 @@
-import {useAuth} from "./useAuth";
+import {useToken} from "./useToken";
 
 export {
-	useAuth,
+	useToken,
 }

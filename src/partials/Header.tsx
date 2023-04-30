@@ -1,11 +1,14 @@
 import {ButtonDarkMod} from "../components/ButtonDarkMod";
 import {Logo} from "../components/Logo";
-import {Search} from "../components/imput";
+import {useAtom} from "jotai";
+import {global} from "../store";
 
 type Props = {
 }
 
 const Header = ({}: Props) => {
+
+	const [Global] = useAtom(global)
 
 	return (
 		<header
