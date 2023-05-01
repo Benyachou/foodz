@@ -1,17 +1,18 @@
 import {Navigate} from 'react-router-dom';
-import {useToken} from "../hooks";
+import {useSessionStorage} from "../hooks";
 
 type AuthProps = {
 	children: JSX.Element | JSX.Element[]
+	enabled: boolean
 }
 
-const AuthMiddleware = ({ children }:AuthProps) => {
+const AuthMiddleware = ({ children,enabled }:AuthProps) => {
 
-	/*const { token } = useToken();
-
-	if (!token) {
+	const {value} = useSessionStorage('token')
+	const token = value()
+	if (!token && enabled) {
 		return <Navigate to="/login" replace />;
-	}*/
+	}
 
 	return <>{children}</>;
 };

@@ -2,11 +2,7 @@ import {LoginAuth} from "../partials/forms";
 import {useAuth} from "../hooks/apiHook/useAuth";
 import {Loading} from "../components";
 
-type Props = {
-
-}
-
-const Login = ({}: Props) => {
+const Login = () => {
 
 	const {fetchPostLogin} = useAuth()
 	const {isLoading,mutate:postLogin} = fetchPostLogin()
@@ -26,7 +22,7 @@ const Login = ({}: Props) => {
 
 	// login page here
 	return (<div className={""}>
-        <h1 className={'my-10 text-white'}>Login</h1>
+        <h1 className={'my-10 text-white'}>Connexion</h1>
 		<form className={"form flex flex-col relative"} onSubmit={(e) => handleLogin(e)}>
 			{isLoading && (
 				<div className={'z-50 absolute w-full h-full flex justify-center items-center'}>
@@ -34,7 +30,7 @@ const Login = ({}: Props) => {
 				</div>
 			)}
 			<LoginAuth />
-			<button type={"submit"} className={'btn my-4'}>Login</button>
+			<button type={"submit"} className={'btn my-4'}>Connexion</button>
 		</form>
 	</div>)
 }

@@ -1,8 +1,8 @@
 import {useMutation} from "react-query";
 import {toast} from "react-toastify";
 import {postLogin} from "../../api/Users/Auth";
-import {useToken} from "../useToken";
 import {useNavigate} from "react-router-dom";
+import {useSessionStorage} from "../useSessionStorage";
 
 const useAuth = () => {
 
@@ -14,7 +14,7 @@ const useAuth = () => {
 		}
 
 		const navigate = useNavigate();
-		const {setToken} = useToken()
+		const {setValue:setToken} = useSessionStorage()
 
 		return useMutation<any,Error,LoginPost>(
 			(valueLogin:LoginPost) => postLogin(valueLogin),
@@ -25,11 +25,11 @@ const useAuth = () => {
 					console.error(error)
 					toast.error("Erreur [31]");
 				},
-				onSuccess: (data, variables, context) => {
+				onSuccess: (data) => {
 					if (data.status === 200) {
-						setToken(data.resp.token)
+						setToken('token',data.resp.token)
 						toast.success("Vous êtes connecté")
-						navigate("/")
+						navigate('/')
 					} else {
 						toast.error("Erreur login");
 					}

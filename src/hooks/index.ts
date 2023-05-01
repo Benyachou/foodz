@@ -1,5 +1,5 @@
-import {useToken} from "./useToken";
+import {useSessionStorage} from "./useSessionStorage";
 
 export {
-	useToken,
+	useSessionStorage,
 }
