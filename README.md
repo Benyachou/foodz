@@ -16,10 +16,14 @@
 ## Running Storybook [local]
 * pnpm run storybook
 
+## React UI Library
+[flowbite](https://flowbite.com/blocks/)
 
 ## production
 * pnpm run build
 * pm2 start --name foodz-app pnpm -- start
+
+* scp -r data ubuntu@217.182.170.219:/home/ubuntu/www/foodz/source/data
 
 ## troubleshooting
 * lsof -i tcp:{PORT} // check if port is in use

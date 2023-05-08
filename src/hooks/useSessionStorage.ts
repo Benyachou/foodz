@@ -1,7 +1,7 @@
-const useSessionStorage = (keyName:string|undefined=undefined) => {
+const useSessionStorage = () => {
 
-		const value = () => {
-			if (keyName)
+	const value = (keyName:string) => {
+		if (keyName)
 			try {
 				const value = window.sessionStorage.getItem(keyName);
 
@@ -11,26 +11,27 @@ const useSessionStorage = (keyName:string|undefined=undefined) => {
 			} catch (err) {
 				return keyName;
 			}
-		}
+	}
+	/*const [value] = useState(getValue());*/
 
-		const setValue = (keyName:string,newValue:any) => {
-			try {
-				window.sessionStorage.setItem(keyName, JSON.stringify(newValue));
-			} catch (err) {}
-			return newValue;
-		};
+	const setValue = (keyName:string,newValue:any) => {
+		try {
+			window.sessionStorage.setItem(keyName, JSON.stringify(newValue));
+		} catch (err) {}
+		return newValue;
+	};
 
-		const removeValue = (keyName:string) => {
-			try {
-				window.sessionStorage.removeItem(keyName);
-			} catch (err) {}
-		}
+	const removeValue = (keyName:string) => {
+		try {
+			window.sessionStorage.removeItem(keyName);
+		} catch (err) {}
+	}
 
-		return {
-			value,
-			setValue,
-			removeValue
-		};
+	return {
+		value,
+		setValue,
+		removeValue
+	};
 
 }
 

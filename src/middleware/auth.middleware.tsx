@@ -8,8 +8,8 @@ type AuthProps = {
 
 const AuthMiddleware = ({ children,enabled }:AuthProps) => {
 
-	const {value} = useSessionStorage('token')
-	const token = value()
+	const {value} = useSessionStorage()
+	const token = value('token')
 	if (!token && enabled) {
 		return <Navigate to="/login" replace />;
 	}

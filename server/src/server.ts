@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import path from "path";
 import {api} from "./routes/api";
 import {web} from "./routes/web";
+import {authMiddleware} from "./middleware/auth";
 const bodyParser = require('body-parser')
 const session = require('express-session');
 const cors = require('cors');
@@ -27,18 +28,28 @@ app.use(session({
 // API //
 api.forEach((route) => {
     app[route.method]('/api' + route.route, async (req: Request, res: Response) => {
+
         let status = 200;
         let object = {};
-        console.log(`[API] [${route.method.toUpperCase()}] /api${route.route}`);
         res.set('Access-Control-Allow-Origin', '*'); // DEV ONLY
-        const json = await route.controller(req, res)
-        if (typeof json.status !== 'undefined' && typeof json.jsonRep !== 'undefined'){
-            status = json.status
-            object = json.jsonRep
-        } else {
-            object = json
+
+        const controller = async() => {
+            const json = await route.controller(req, res)
+            if (typeof json.status !== 'undefined' && typeof json.jsonRep !== 'undefined'){
+                status = json.status
+                object = json.jsonRep
+            } else {
+                object = json
+            }
+            console.log(`[API] [${route.method.toUpperCase()}] /api${route.route}`);
+            res.status(status).json(object);
         }
-        res.status(status).json(object);
+
+        if (route.auth) {
+            await authMiddleware(req, res,controller)
+        } else {
+            await controller()
+        }
     });
 })
 

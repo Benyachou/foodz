@@ -1,4 +1,4 @@
-import {Input, MultipleSelect, SimpleSelect} from "../../components/imput";
+import {FilesDrop, Input, MultipleSelect, SimpleSelect, Wysiwyg} from "../../components/imput";
 import {useAtom} from "jotai";
 import {global} from "../../store";
 
@@ -29,12 +29,26 @@ const AddUpdateRecette = () => {
 				}]}
 			/>
 
+			<FilesDrop
+				name={'recette'}
+				label={'Recette'}
+				placeholder={'Recette'}
+			/>
+
 			<MultipleSelect
 				name={'ingredients'}
 				label={'Ingrédients'}
 				placeholder={'Ingrédients'}
 				options={Global.ingredients.map((ingredient:any) => ({value: ingredient.id, label: ingredient.name}))}
 			/>
+
+			<Wysiwyg
+				name={'recette'}
+				label={'Recette'}
+				placeholder={'Recette'}
+			/>
+
+
 		</>
 	)
 }

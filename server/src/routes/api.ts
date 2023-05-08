@@ -2,27 +2,23 @@ import {ingredients, recettes, auth} from "../controllers";
 import {Api} from "../types/api";
 import {testController} from "../controllers/testController";
 export const api:Api = [
-	// TEST //
-	{
-		method: "get",
-		route: "/test",
-		controller: testController.get
-	},
-	// TEST //
 	{
 		method: "get",
 		route: "/recettes",
-		controller: recettes.getAll
+		controller: recettes.getAll,
+		auth: true
 	},
 	{
 		method: "post",
 		route: "/add-recettes",
-		controller: recettes.store
+		controller: recettes.store,
+		auth: true
 	},
 	{
 		method: "get",
 		route: "/ingredients",
-		controller: ingredients.getAll
+		controller: ingredients.getAll,
+		auth: true
 	},
 	// AUTH //
 	{
