@@ -1,0 +1,19 @@
+# Extending image
+FROM node:16.17.1-alpine3.16 as build
+
+WORKDIR /usr/app/server
+COPY ./server /usr/app/server
+
+RUN npm install
+
+RUN npm install bcrypt
+
+# Bundle server source
+RUN npm run build
+
+# Port to listener
+EXPOSE 5001
+
+# Main command
+CMD [ "node", "--max_old_space_size=8192", "dist/server.js" ]
+#Error: Cannot find module '/usr/app/server/dist/server.js'

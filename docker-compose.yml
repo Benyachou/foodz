@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  server:
+    #tty: true
+    build:
+      context: .
+      dockerfile: server/DockerFile
+    ports:
+      - "5001:5001"
+    environment:
+      - INSTANCE=app
+      - PORT=5001
+      - JWT_SECRET=secret123
+      - SESSION_SECRET=secret123
+    networks:
+      - app-network
+    volumes:
+      - ./data:/usr/app/data
+      #- ./server:/usr/app/server # named volume
+      #- /usr/app/server/node_modules # anonymous volume for node_modules only
+
+  app:
+    build:
+      context: .
+      dockerfile: DockerFile
+    #links:
+      #- "app"
+    depends_on:
+      - server
+    environment:
+      - INSTANCE=app
+    ports:
+      - "8081:80"
+      #- "443:443"
+    volumes:
+      - ./docker/nginx/logs:/var/log/nginx
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

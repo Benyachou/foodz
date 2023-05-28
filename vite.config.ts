@@ -15,7 +15,7 @@ export default defineConfig({
     })
   ],
   build: {
-    outDir: resolve(__dirname, 'server/dist'),
+    outDir: resolve(__dirname, 'dist'),
     manifest: true,
     rollupOptions: {
       input: {

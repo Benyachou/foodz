@@ -1,0 +1,26 @@
+node {
+  try {
+    stage('Checkout') {
+      checkout scm
+    }
+    stage('Environment') {
+      sh 'git --version'
+      echo "Branch: ${env.BRANCH_NAME}"
+      sh 'export NODE_ENV=production'
+      sh 'printenv'
+      /* sh 'ssh ubuntu@217.182.170.219 \"docker image prune -a --force\"' */
+    }
+    stage('Copy project to server') {
+       sh 'rsync -avzO --exclude \'node_modules\' --exclude \'run\' --exclude \'jest_0\' --exclude \'.git\'  -e \"ssh -i ~/.ssh/id_rsa \" .  ssh ubuntu@217.182.170.219:/docker_containers/Frontend_master'
+    }
+    stage('Build') {
+       sh 'ssh ubuntu@217.182.170.219 \"docker-compose -f /docker_containers/Frontend_master/docker-compose.yml build\"'
+    }
+    stage('Deploy'){
+      sh 'ssh ubuntu@217.182.170.219 \"docker-compose -f /docker_containers/Frontend_master/docker-compose.yml up -d\"'
+    }
+  }
+  catch (err) {
+    throw err
+  }
+}
