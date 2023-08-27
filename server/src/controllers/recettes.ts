@@ -34,12 +34,15 @@ class recettes extends jsonFManager{
 
 	public static async store(req:any,res:any){
 
-		const { name, calories, ingredients } = req.body;
+		const { name, calories, ingredients, recette } = req.body;
+
+		console.log(req.body)
 
 		return await super.jsonCreate("recettes",{
 			name: String(name),
 			calories: parseInt(calories),
-			ingredients: StringToArrayInt(ingredients)
+			ingredients: StringToArrayInt(ingredients),
+			recette: String(recette),
 		});
 	}
 
@@ -47,8 +50,9 @@ class recettes extends jsonFManager{
 
 	}
 
-	public static async destroy() {
-
+	public static async destroy(req:any,res:any) {
+		const { id } = req.body;
+		return await super.jsonDeleteOne("recettes",id);
 	}
 }
 

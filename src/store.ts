@@ -1,12 +1,19 @@
 import { atom } from "jotai";
-import {Ingredient} from "./api/Ingredients/Ingredients.type";
+import {atomWithStorage} from "jotai/utils";
+import {atomsWithQuery} from "jotai-tanstack-query";
+import {getIngredients} from "./api/Ingredients/Ingredients";
 
 export const global = atom<{
-	theme: "dark" | "light";
-	ingredients: Ingredient[];
 	openDrawer: boolean;
 }>({
-	theme: "dark",
-	ingredients: [],
 	openDrawer: false,
 });
+
+export const theme = atomWithStorage<"dark" | "light">('darkMode', "dark");
+export const auth = atomWithStorage('auth', false);
+
+/*
+export const [ingredientAtom] = atomsWithQuery((get) => ({
+	queryKey: ['type'],
+	queryFn: async () => getIngredients(),
+}))*/

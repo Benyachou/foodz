@@ -14,7 +14,11 @@ class jsonFManager {
 	}
 
 	public static async jsonDeleteOne(jsonFile:string,id:number) {
-
+		const json = JSON.parse(fs.readFileSync(jsonFManager.pathData + jsonFile + ".json").toString());
+		const index = await json.data.findIndex((item:any) => item.id === id);
+		json.data.splice(index, 1);
+		fs.writeFileSync(jsonFManager.pathData + jsonFile + ".json", JSON.stringify(json, null, 2));
+		return json;
 	}
 
 	public static async jsonCheckAuth(username:string,password:string) {

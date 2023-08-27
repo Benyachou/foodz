@@ -2,6 +2,7 @@ import {Icon} from "./index";
 import {useAtom} from "jotai";
 import {global} from "../store";
 import {AnimatePresence, motion} from "framer-motion";
+import {useIngredients} from "../hooks/apiHook";
 
 type Props = {
     recette: {
@@ -12,12 +13,15 @@ type Props = {
     }
     onClickUpdate?: () => void
     onClickDelete?: () => void
+    onClickView?: () => void
     index?:number
+    className?:string
 }
 
-const Card = ({recette,onClickUpdate,onClickDelete,index=1}:Props) => {
+const Card = ({recette,onClickUpdate,onClickDelete,onClickView,index=1,className=""}:Props) => {
 
-    const [Global] = useAtom(global)
+    const {data} = useIngredients()
+    const ingredients = data || []
 
     return(
         <AnimatePresence>
@@ -28,10 +32,9 @@ const Card = ({recette,onClickUpdate,onClickDelete,index=1}:Props) => {
                     delay:0.1 + index * 0.1,
                     duration:0.2
                 }}
-                className="card"
+                className={"card " + className}
                 key={recette.id}>
-                <a
-                    href={'/recettes/' + recette.id}
+                <div
                     className={'flex justify-between'}>
                     <div className='flex items-center'>
                         {/* name */}
@@ -46,16 +49,17 @@ const Card = ({recette,onClickUpdate,onClickDelete,index=1}:Props) => {
                             ))}
                         </ul>
                     </div>
-                    <div className={'flex'}>
-                        <Icon name={'edit'} onClick={() => onClickUpdate && onClickUpdate()} />
+                    <div className={'flex '}>
+                        <Icon name={'eye'} className={'ml-2'} onClick={() => onClickView && onClickView()} />
+                        <Icon name={'edit'} className={'ml-2'} onClick={() => onClickUpdate && onClickUpdate()} />
                         <Icon name={'delete'} className={'ml-2'} onClick={() => onClickDelete && onClickDelete()} />
                     </div>
-                </a>
+                </div>
 
                 {/* ingredients */}
                 <ul className='flex mt-2'>
                     {recette.ingredients.map((id:number) => {
-                        const ingredientName = Global.ingredients.find((i:any) => i.id === id)?.name
+                        const ingredientName = ingredients.find((i:any) => i.id === id)?.name
                         return (
                             <li key={id} className='label'>
                                 {ingredientName}

@@ -21,7 +21,6 @@ export const getRecettes = async (params:object) => {
 		.then((res) => res.data)
 }
 
-
 export const postRecette = async (valueNewRecette:object) =>
 	fetch(URL_API+"/api/add-recettes",{
 		method: "POST",
@@ -30,6 +29,18 @@ export const postRecette = async (valueNewRecette:object) =>
 			'authorization': `Bearer ${value('token')}`
 		},
 		body: JSON.stringify(valueNewRecette)
+	})
+		.then((res) => res.json())
+		.then((res) => res.data)
+
+export const deleteRecette = async (id:number) =>
+	fetch(URL_API+"/api/delete-recette",{
+		method: "DELETE",
+		headers: {
+			'Content-Type': 'application/json',
+			'authorization': `Bearer ${value('token')}`
+		},
+		body: JSON.stringify({id})
 	})
 		.then((res) => res.json())
 		.then((res) => res.data)

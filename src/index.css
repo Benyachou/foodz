@@ -14,7 +14,7 @@ h2{
 }
 
 .App{
-    @apply bg-gray-200 dark:bg-gray-700 min-h-screen relative;
+    @apply bg-gray-200 dark:bg-gray-700 min-h-screen text-gray-700 dark:text-white relative;
 }
 
 .card{

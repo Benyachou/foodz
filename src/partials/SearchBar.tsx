@@ -1,8 +1,5 @@
 import {MultipleSelect, Search, SimpleSelect} from "../components/imput";
-import {useAtom} from "jotai";
-import {global} from "../store";
-import {useRecettes} from "../hooks/apiHook";
-import {useState} from "react";
+import {useIngredients} from "../hooks/apiHook";
 
 type Props = {
 	search: any,
@@ -11,9 +8,8 @@ type Props = {
 
 const SearchBar = ({search,setSearch}: Props) => {
 
-	const [Global] = useAtom(global)
-	const {fetchGetRecette} = useRecettes()
-
+	const {data} = useIngredients()
+	const ingredients = data || []
 
 	return (<div className={'flex items-center my-4'}>
 
@@ -27,7 +23,7 @@ const SearchBar = ({search,setSearch}: Props) => {
 		<div className={'w-1/3'}>
 			<MultipleSelect
 				onChange={(value) => setSearch({...search, ingredients: value})}
-				options={Global.ingredients.map((ingredient:any) => ({value: ingredient.id, label: ingredient.name}))}
+				options={ingredients.map((ingredient:any) => ({value: ingredient.id, label: ingredient.name}))}
 				className={'mr-2'}
 				placeholder={'Ingrédients'} />
 		</div>

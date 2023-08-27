@@ -35,7 +35,7 @@ api.forEach((route) => {
 
         const controller = async() => {
             const json = await route.controller(req, res)
-            if (typeof json.status !== 'undefined' && typeof json.jsonRep !== 'undefined'){
+            if (json && (typeof json.status !== 'undefined' && typeof json.jsonRep !== 'undefined')){
                 status = json.status
                 object = json.jsonRep
             } else {

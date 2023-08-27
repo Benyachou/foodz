@@ -2,22 +2,30 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Routes as Router, Route } from 'react-router-dom';
 import {AuthMiddleware} from "./middleware/auth.middleware";
 import {QueryClient, QueryClientProvider} from "react-query";
-import {useAtom} from "jotai";
-import {global} from "./store";
+import { Provider, useAtom } from "jotai";
+import {theme} from "./store";
 import {ToastContainer} from "react-toastify";
 import {Routes} from "./Routes";
 import {NotFound404} from "./pages";
+import {ReactQueryDevtools} from "react-query/devtools";
 
-const queryClient:QueryClient = new QueryClient()
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: Infinity
+        }
+    }
+});
 
 function App() {
 
-    const [Global] = useAtom(global)
+    const [Theme] = useAtom(theme)
 
+    // @ts-ignore
     return (
         <QueryClientProvider client={queryClient}>
-            <div className={Global.theme}>
-                <ToastContainer theme={Global.theme}/>
+            <div className={Theme}>
+                <ToastContainer theme={Theme}/>
                 <div className={"App"}>
                     <Router>
                         <Route path="*" element={<NotFound404 />} />
@@ -38,6 +46,7 @@ function App() {
                     </Router>
                 </div>
             </div>
+            <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     )
 }

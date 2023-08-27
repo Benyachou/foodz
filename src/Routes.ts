@@ -1,4 +1,4 @@
-import {Login, Recettes,Ingredients} from "./pages";
+import {Login, Recettes, Ingredients, AddRecette} from "./pages";
 import {AppLayout, LoginLayout} from "./Layouts";
 /*import {RoutesMap} from "./types/Route";*/
 
@@ -18,6 +18,12 @@ const Routes = [
 	{
 		path: '/ingredients',
 		element: Ingredients,
+		layout: AppLayout,
+		auth: true
+	},
+	{
+		path: '/add-recette',
+		element: AddRecette,
 		layout: AppLayout,
 		auth: true
 	}

@@ -3,6 +3,7 @@ type Recette = {
 	name: string;
 	ingredients: number[];
 	calories: number;
+	recette: string;
 }
 
 export type { Recette };

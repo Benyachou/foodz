@@ -1,5 +1,9 @@
 # FOODZ
 
+## Description
+Foodz is a web application that allows you to find recipes based on the ingredients you have at home. It also allows you to find recipes based on your diet and allergies. 
+the database is retrieved on the folder data/*.json.
+
 ## Requirements
 * Node.js = 18.x.x
 
@@ -22,8 +26,6 @@
 ## production
 * pnpm run build
 * pm2 start --name foodz-app pnpm -- start
-
-* scp -r data ubuntu@217.182.170.219:/home/ubuntu/www/foodz/source/data
 
 ## troubleshooting
 * lsof -i tcp:{PORT} // check if port is in use

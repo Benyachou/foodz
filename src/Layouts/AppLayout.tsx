@@ -7,6 +7,7 @@ type Props = {
 }
 
 const AppLayout = ({children}:Props) => {
+
 	return <div className={'w-full'}>
 		<Header/>
 		<Drawer/>

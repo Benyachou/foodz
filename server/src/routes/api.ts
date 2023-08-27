@@ -20,6 +20,11 @@ export const api:Api = [
 		controller: ingredients.getAll,
 		auth: true
 	},
+	{
+		method: "delete",
+		route: "/delete-recette",
+		controller: recettes.destroy,
+	},
 	// AUTH //
 	{
 		method: "post",
